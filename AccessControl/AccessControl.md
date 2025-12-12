@@ -189,3 +189,7 @@ In this example `Location` class can be accessed, subclassed, and overridden in 
 | `internal`  | Same module                        | N/A                                     |
 | `fileprivate` | Same source file                 | N/A                                     |
 | `private`   | Same type / extension              | N/A                                     |
+
+
+## Conclusion
+Access control forms a cornerstone of Swift, enabling precise control over code visibility and modification. Selecting appropriate levels from  __private for encapsulation__ to __open for extensibility__ promotes secure, modular, and maintainable architectures.
