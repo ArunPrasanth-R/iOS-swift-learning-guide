@@ -69,3 +69,18 @@ class Location {
 ```
 In this example, `city` variable is accessible only inside `Location.swift` source file. We can't access `city` variable outside this source file.
 
+## internal (default)
+Accessible anywhere within the same module (target/framework), not from other modules. `internal` is the default access level, no need to specify the keyword.
+
+_Note: Best to keep private to the target or framework_
+
+```
+Swift
+
+class Location {
+    func getCities() -> [String] {
+        return ["Coimbatore", "Appenzell", "Queenstown"]
+    }
+}
+```
+In this example, `Location` class and `getCities()` method are `internal` by default since no access modifier is specified. Hence it can be accessed within the same module not outside.
