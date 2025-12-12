@@ -47,4 +47,25 @@ extension Location {
 }
 ```
 
-In this example, `city` is accessible because the extension is in the same file `(Location.swift)` but `country` is not accessible because the extension is in a different file `(Extension.swift)`.
+In this example, `city` is accessible because the extension is in the same source file `(Location.swift)`, but `country` is not accessible because the extension is in a different file `(Extension.swift)`.
+
+## fileprivate
+Accessible anywhere within the same source file. Use `fileprivate` to enable access from other classes or structs in the same file while blocking it from outside that file.
+
+_Note: Best to hide implementation detail in a single source file._
+
+```
+//Location.swift
+swift
+
+class Location {
+    fileprivate var city: String
+
+    init(city: String, country: String) {
+        self.city = city
+        self.country = country
+    }
+}
+```
+In this example, `city` variable is accessible only inside `Location.swift` source file. We can't access `city` variable outside this source file.
+
