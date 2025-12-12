@@ -179,3 +179,13 @@ class Vacation: Location { // ✅ Correct: can be subclassed in outside module
 
 ```
 In this example `Location` class can be accessed, subclassed, and overridden in an outside Module.
+
+## Quick Comparison Table
+
+| Level        | Visible In                         | Can Subclass / Override Outside Module? |
+|-------------|-------------------------------------|-----------------------------------------|
+| `open`      | Any module (`import`)              | ✅ Yes                                   |
+| `public`    | Any module (`import`)              | ❌ No                                    |
+| `internal`  | Same module                        | N/A                                     |
+| `fileprivate` | Same source file                 | N/A                                     |
+| `private`   | Same type / extension              | N/A                                     |
