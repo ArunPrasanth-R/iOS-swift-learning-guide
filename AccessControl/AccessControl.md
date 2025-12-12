@@ -35,14 +35,14 @@ class Location {
 
 extension Location {
     func getCity() -> String {
-      return city   // Accessible because extension is in the same file.
+      return city   // ✅ Accessible because extension is in the same file.
     }
 }
 
 //Extension.swift
 extension Location {
     func getCountry() -> String {
-      return country   // Not accessible because extension is in a different file.
+      return country   // ❌ Not accessible because extension is in a different file.
     }
 }
 ```
@@ -75,7 +75,7 @@ Accessible anywhere within the same module (target/framework), not from other mo
 _Note: Best to keep private to the target or framework_
 
 ```
-Swift
+swift
 
 class Location {
     func getCities() -> [String] {
@@ -84,3 +84,42 @@ class Location {
 }
 ```
 In this example, `Location` class and `getCities()` method are `internal` by default since no access modifier is specified. Hence it can be accessed within the same module not outside.
+
+## public 
+Accessible from any module, but cannot be subclassed or overridden by external modules.
+
+```
+swift
+//Module A
+public class Location {
+    public var city: String
+    
+    public init(city: String) {
+        self.city = city
+    }
+
+    public func getCities() -> [String] {
+        return ["Coimbatore", "Appenzell", "Queenstown"]
+    }
+}
+
+//Module A
+class Vacation: Location {
+    var location = Location(city: "coimbatore")
+
+    override func getCities() -> [String] {
+        return ["Coimbatore"]
+    }
+}
+
+//Module B
+class Vacation: Location { // ❌ cannot be subclassed in outside module
+    
+    // ❌ cannot be overridden in the outside module
+    override func getCities() -> [String] { 
+        return ["Coimbatore"]
+    }
+}
+
+```
+In this example `Location` class can be subclassed and `getCities` method can be accessed in `Module A`, but cannot be accessed in `Module B`.
