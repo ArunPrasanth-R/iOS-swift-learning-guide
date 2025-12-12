@@ -50,7 +50,7 @@ extension Location {
 In this example, `city` is accessible because the extension is in the same source file `(Location.swift)`, but `country` is not accessible because the extension is in a different file `(Extension.swift)`.
 
 ## fileprivate
-Accessible anywhere within the same source file. Use `fileprivate` to enable access from other classes or structs in the same file while blocking it from outside that file.
+Accessible anywhere within the __same source file__. Use `fileprivate` to enable access from other classes or structs in the same file while blocking it from outside that file.
 
 _Note: Best to hide implementation detail in a single source file._
 
@@ -86,7 +86,7 @@ class Location {
 In this example, `Location` class and `getCities()` method are `internal` by default since no access modifier is specified. Hence it can be accessed within the same module not outside.
 
 ## public 
-Accessible from any module, but cannot be subclassed or overridden by external modules.
+Accessible from __any module__, but __cannot__ be __subclassed__ or __overridden__ by external modules.
 
 ```
 swift
@@ -141,3 +141,41 @@ class Vacation: Location { // ❌ Error: cannot be subclassed in outside module
 
 ```
 In this example `Location` class can be accessed in both Module A and Module B, but cannot be subclassed or overridden in `Module B`. 
+
+## open 
+Accessible from __any module__ and can be __subclassed__ or __overridden__ by external modules. It is the __most permissive__ access level.
+
+```
+swift
+//Module A
+public class Location {
+    public var city: String
+    
+    public init(city: String) {
+        self.city = city
+    }
+
+    public func getCities() -> [String] {
+        return ["Coimbatore", "Appenzell", "Queenstown"]
+    }
+}
+
+//Module B
+import Location
+
+class Vacation: Location { // ✅ Correct: can be subclassed in outside module
+
+    var location = Location(city: "coimbatore")
+
+    init() {
+        print("City = \(location.city)")  // ✅ Works
+    }
+    
+    // ✅ Correct: can be overridden in the outside module
+    override func getCities() -> [String] { 
+        return ["Coimbatore"]
+    }
+}
+
+```
+In this example `Location` class can be accessed, subclassed, and overridden in an outside Module.
