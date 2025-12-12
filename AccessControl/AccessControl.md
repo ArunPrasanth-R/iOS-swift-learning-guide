@@ -35,14 +35,14 @@ class Location {
 
 extension Location {
     func getCity() -> String {
-      return city   // ✅ Accessible because extension is in the same file.
+      return city   // ✅ Correct: Accessible because extension is in the same file.
     }
 }
 
 //Extension.swift
 extension Location {
     func getCountry() -> String {
-      return country   // ❌ Not accessible because extension is in a different file.
+      return country   // ❌ Error: Not accessible because extension is in a different file.
     }
 }
 ```
@@ -107,19 +107,37 @@ public class Location {
 class Vacation: Location {
     var location = Location(city: "coimbatore")
 
+    init() {
+        print("City = \(location.city)")
+    }
+
     override func getCities() -> [String] {
         return ["Coimbatore"]
     }
 }
 
 //Module B
-class Vacation: Location { // ❌ cannot be subclassed in outside module
+import Location
+
+class Vacation: Location { // ❌ Error: cannot be subclassed in outside module
+
+    // ✅ Correct: instantiate and use (no subclassing)
+    var location = Location(city: "coimbatore")
+
+    init() {
+        print("City = \(location.city)")  // ✅ Works
+    }
     
-    // ❌ cannot be overridden in the outside module
+    // ❌ Error: cannot be overridden in the outside module
     override func getCities() -> [String] { 
         return ["Coimbatore"]
+    }
+
+    func getMyCities() -> [String] {
+        let cities = location.getCities()  // ✅ Call public method
+        return [cities[0]]                
     }
 }
 
 ```
-In this example `Location` class can be subclassed and `getCities` method can be accessed in `Module A`, but cannot be accessed in `Module B`.
+In this example `Location` class can be accessed in both Module A and Module B, but cannot be subclassed or overridden in `Module B`. 
