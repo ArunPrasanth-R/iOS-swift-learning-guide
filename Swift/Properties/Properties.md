@@ -125,12 +125,17 @@ swift
 
 struct Configuration {
     static let defaultTimeout = 30
-    static var maxConnections = 5
+    //static var maxConnections = 5 // Error
+    @MainActor static var maxConnections = 5
 }
 
 print(Configuration.defaultTimeout)
-Configuration.maxConnections = 10
+await Configuration.maxConnections = 10
 ```
+For **`static var maxConnections = 5`** error occurs because **`Swift 6's strict concurrency model`** (standard as of 2025) prohibits mutable global or static variables that are "nonisolated".
+Because a static var is accessible from anywhere in our app, multiple threads could try to read or change it at the same time, leading to a **`data race`**.
+
+Fix: If the property is used for UI or only accessed on the main thread, add the **`@MainActor`** attribute. 
 
 ## 🎁 Property Wrappers
 
