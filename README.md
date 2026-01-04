@@ -8,4 +8,5 @@ This guide is designed to help iOS developers prepare for their journey, coverin
 ## 📚 Table of Contents
 - [Properties](/Swift/Properties/Properties.md)
 - [Access Control](/Swift/AccessControl/AccessControl.md)
+- [Functions](/Swift/Functions/Functions.md)
 
