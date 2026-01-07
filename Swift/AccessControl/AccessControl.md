@@ -19,7 +19,7 @@ Accessible only within the __enclosing declaration__ and it's __extension__ in t
 
 _Note: Best for strictly encapsulated details._
 
-```
+```swift
 //Location.swift
 swift
 
@@ -54,7 +54,7 @@ Accessible anywhere within the __same source file__. Use `fileprivate` to enable
 
 _Note: Best to hide implementation detail in a single source file._
 
-```
+```swift
 //Location.swift
 swift
 
@@ -74,7 +74,7 @@ Accessible anywhere within the same module (target/framework), not from other mo
 
 _Note: Best to keep private to the target or framework_
 
-```
+```swift
 swift
 
 class Location {
@@ -88,7 +88,7 @@ In this example, `Location` class and `getCities()` method are `internal` by d
 ## public 
 Accessible from __any module__, but __cannot__ be __subclassed__ or __overridden__ by external modules.
 
-```
+```swift
 swift
 //Module A
 public class Location {
@@ -145,7 +145,7 @@ In this example `Location` class can be accessed in both Module A and Module B, 
 ## open 
 Accessible from __any module__ and can be __subclassed__ or __overridden__ by external modules. It is the __most permissive__ access level.
 
-```
+```swift
 swift
 //Module A
 open class Location {
