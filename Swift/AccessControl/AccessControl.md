@@ -148,7 +148,7 @@ Accessible from __any module__ and can be __subclassed__ or __overridden__ by ex
 ```
 swift
 //Module A
-public class Location {
+open class Location {
     public var city: String
     
     public init(city: String) {
